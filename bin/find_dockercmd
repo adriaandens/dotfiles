@@ -1,0 +1,24 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+
+use Cwd;
+
+my $dockercmd_filename = ".dockercmd";
+
+find_dockercmd(@ARGV);
+
+sub find_dockercmd {
+	my $current_dir = getcwd();
+	if(-e $dockercmd_filename && -r $dockercmd_filename) {
+		exit system("bash $dockercmd_filename");
+	} else {
+		chdir("..");
+		find_dockercmd();
+	}
+}
+
+__END__
+Example dockercmd:
+
+	docker run -it -v /home/adri/Development/crafting_interpreters/jlox/:/usr/local/code/src jlox
