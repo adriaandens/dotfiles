@@ -1,0 +1,46 @@
+general {
+  colors = true
+  color_good = "#a3be8c"
+  color_bad  = "#bf616a"
+  color_degraded = "#ebcb8b"
+  interval = 1
+  separator = "|"
+}
+
+order += "cpu_usage"
+order += "memory"
+order += "disk /"
+order += "wireless wlp32s0"
+order += "ethernet enp30s0"
+order += "tztime bxl"
+
+memory {
+  memory_used_method = classical
+  format="Memory: %used / %total"
+}
+
+cpu_usage {
+  format = "CPU_0: %cpu0 CPU_1: %cpu1 CPU_2: %cpu2 CPU_3: %cpu3"
+  degraded_threshold = 90
+  max_threshold = 95
+}
+
+disk "/" {
+  format = "/: %free avail"
+}
+
+wireless wlp32s0 {
+  format_up = "W: %ip (Q:%quality) %bitrate - %frequency"
+  format_down  = "W: down"
+}
+
+ethernet enp30s0 {
+  format_up = "ETH: %ip (%speed)"
+  format_down = "ETH: down"
+}
+
+tztime bxl {
+        format = "%Y-%m-%d %H:%M:%S %Z"
+        timezone = "Europe/Brussels"
+}
+
